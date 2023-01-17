@@ -16,12 +16,10 @@ class OrderForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.name && this.state.ingredients.length) {
-      Promise.resolve(sendOrder(this.state.name, this.state.ingredients))
+      sendOrder(this.state.name, this.state.ingredients)
         .then(this.fetchOrders())
         this.clearInputs()
-      
     }
-    
   }
 
   clearInputs = () => {

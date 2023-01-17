@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   fetchOrders = () => {
-    Promise.resolve(getOrders())
+    getOrders()
       .then(data => this.setState({orders: data.orders}))
       .catch(err => console.error('Error fetching:', err));
   }

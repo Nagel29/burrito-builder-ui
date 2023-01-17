@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { sendOrder } from '../../apiCalls';
 
 class OrderForm extends Component {
   constructor(props) {
     super();
     this.props = props;
+    this.fetchOrders = props.fetchOrders;
     this.state = {
       name: '',
       ingredients: []
@@ -13,11 +15,26 @@ class OrderForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.clearInputs();
+    if (this.state.name && this.state.ingredients.length) {
+      Promise.resolve(sendOrder(this.state.name, this.state.ingredients))
+        .then(this.fetchOrders())
+        this.clearInputs()
+      
+    }
+    
   }
 
   clearInputs = () => {
     this.setState({name: '', ingredients: []});
+  }
+
+  handleNameChange = (event) => {
+    this.setState({name: event.target.value})
+  }
+
+  handleIngredientChange = (event) => {
+    event.preventDefault()
+    this.setState({ingredients: [...this.state.ingredients, event.target.name]})
   }
 
   render() {

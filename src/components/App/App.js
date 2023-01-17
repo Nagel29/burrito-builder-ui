@@ -17,9 +17,10 @@ class App extends Component {
   }
 
   fetchOrders = async () => {
-    await getOrders()
-      .then(data => this.setState({orders: data.orders}))
-      .catch(err => console.error('Error fetching:', err));
+    let data = await getOrders()
+    .catch(err => console.error('Error fetching:', err))
+    this.setState({orders: data.orders})
+    
   }
 
   deleteOrder = async (id) => {

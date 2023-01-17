@@ -12,12 +12,11 @@ class OrderForm extends Component {
     };
   }
 
-
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     if (this.state.name && this.state.ingredients.length) {
-      sendOrder(this.state.name, this.state.ingredients)
-        .then(this.fetchOrders())
+      await sendOrder(this.state.name, this.state.ingredients)
+        this.fetchOrders()
         this.clearInputs()
     }
   }
